@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توثيق مفصل لتطبيق "واعي"</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+        :root {
+            --primary-color: #4a90e2; /* Friendly blue */
+            --secondary-color: #50e3c2; /* Bright turquoise */
+            --text-color: #333;
+            --text-muted-color: #555;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Tajawal', sans-serif;
+            --border-radius: 8px;
+            --transition-speed: 0.3s ease;
+            --code-bg: #e9ecef;
+            --code-color: #d63384;
+            --pre-bg: #282c34;
+            --pre-color: #abb2bf;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            position: relative;
+        }
+
+        section h2::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+
+        section h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+         section h4 {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+          section h5 {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--secondary-color); /* Use secondary color for sub-sub-headings */
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        p, li {
+            color: var(--text-muted-color);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+        }
+         ul ul {
+            list-style-type: circle;
+            margin-top: 10px;
+            margin-right: 25px; /* Indent sub-lists */
+         }
+         ul ul ul {
+            list-style-type: square;
+             margin-right: 25px; /* Further indent */
+         }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .explanation {
+            background-color: #eef5fc; /* Light blue background for explanations */
+            border-right: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        .explanation p {
+            margin-bottom: 5px;
+        }
+
+        .step {
+            margin-bottom: 8px;
+            position: relative;
+            padding-right: 25px;
+        }
+        .step::before {
+            content: "»"; /* Use a simple arrow or number */
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        code {
+            font-family: monospace;
+            background-color: var(--code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: var(--code-color);
+        }
+
+        pre {
+            background-color: var(--pre-bg);
+            color: var(--pre-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .db-structure {
+             font-family: 'Courier New', Courier, monospace;
+             font-size: 0.95em;
+             line-height: 1.6;
+             background-color: #f0f4f8;
+             padding: 15px;
+             border-radius: var(--border-radius);
+             border: 1px solid var(--border-color);
+             direction: ltr;
+             text-align: left;
+             margin-top: 10px;
+        }
+        .db-structure ul { list-style: none; padding-left: 0; margin-left: 0;}
+        .db-structure li { margin-bottom: 8px; position: relative; padding-left: 25px;}
+        .db-structure li::before { content: ''; position: absolute; left: 5px; top: 0.7em; border-left: 1px solid var(--primary-color); border-bottom: 1px solid var(--primary-color); width: 10px; height: 10px; transform: rotate(-45deg) translateY(-50%); opacity: 0.6; }
+        .db-structure li > strong { color: var(--primary-color); font-weight: bold; }
+        .db-structure li > span { color: #555; }
+        .db-structure ul ul li { padding-left: 50px; }
+        .db-structure ul ul ul li { padding-left: 75px; }
+
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--header-bg);
+        }
+
+        /* Scroll to top button */
+         #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+         #scrollToTopBtn.show {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+         }
+
+        #scrollToTopBtn:hover {
+            background-color: #357abd; /* Darker blue on hover */
+        }
+
+        html[dir="rtl"] #scrollToTopBtn {
+            right: 30px;
+            left: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container { flex-direction: column; gap: 15px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+            body { font-size: 15px; }
+            section h2 { font-size: 1.6em; }
+            section h3 { font-size: 1.3em; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            section { padding: 20px; }
+            nav ul { gap: 8px; }
+            nav a { padding: 6px 10px; font-size: 0.9em; }
+            .logo { font-size: 1.5em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">تطبيق "واعي"</div>
+            <nav>
+                <ul>
+                    <li><a href="#summary" class="nav-link">ملخص</a></li>
+                    <li><a href="#overview" class="nav-link">نظرة عامة</a></li>
+                    <li><a href="#audience" class="nav-link">الجمهور</a></li>
+                    <li><a href="#screens" class="nav-link">الشاشات</a></li>
+                    <li><a href="#workflow" class="nav-link">سير العمل</a></li>
+                    <li><a href="#ai" class="nav-link">الذكاء الاصطناعي</a></li>
+                    <li><a href="#tech" class="nav-link">التقنية</a></li>
+                    <li><a href="#db" class="nav-link">قاعدة البيانات</a></li>
+                    <li><a href="#conclusion" class="nav-link">الخلاصة</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="summary">
+            <h2>1. ملخص تنفيذي</h2>
+            <p>تطبيق "واعي" مصمم ليكون رفيقًا تعليميًا تفاعليًا لأطفال الروضة (4-6 سنوات)، يركز بشكل أساسي على بناء الوعي الرقمي لديهم بطريقة ممتعة وآمنة. يقدم التطبيق تجارب تعليمية مخصصة من خلال واجهتين متكاملتين: واجهة تحكم للمعلمة تمكنها من إنشاء وإدارة المحتوى التعليمي ومتابعة تقدم الأطفال، وواجهة تفاعلية للطفل ("محطة واعي") يتفاعل فيها مع شخصية كرتونية ودودة من خلال الصوت والأنشطة البصرية. يهدف التطبيق إلى تنمية مهارات الأطفال الأساسية وتعزيز فهمهم للعالم الرقمي.</p>
+            <div class="explanation">
+                <p><strong>الهدف الرئيسي:</strong> ليس فقط تعليم الأطفال، بل جعل التعلم الرقمي تجربة إيجابية وجذابة في سن مبكرة، مع تمكين المعلمات بأدوات فعالة.</p>
+            </div>
+        </section>
+
+        <section id="overview">
+            <h2>2. نظرة عامة على التطبيق</h2>
+
+            <article id="app-description">
+                <h3>2.1 وصف التطبيق</h3>
+                <p>"واعي" هو تطبيق تعليمي مبتكر يستفيد من تقنيات الذكاء الاصطناعي ليعمل كمرشد تفاعلي (Agent) للأطفال. يتميز التطبيق بقدرته على تخصيص التجربة التعليمية لكل طفل بناءً على تفاعلاته.</p>
+                <p><strong>المكونات الأساسية للتجربة:</strong></p>
+                <ul>
+                    <li><strong>شخصية "واعي" التفاعلية:</strong> شخصية كرتونية لطيفة تعمل كمرشد وصديق للطفل، توجهه صوتيًا وبصريًا خلال الأنشطة التعليمية المختلفة.</li>
+                    <li><strong>أنشطة قابلة للتخصيص بواسطة المعلمة:</strong> توفر لوحة تحكم المعلمة أدوات مرنة لإنشاء أنشطة متنوعة (أسئلة، قصص، ألعاب مصغرة) تتوافق مع المنهج الدراسي وأهداف التعلم المحددة.</li>
+                    <li><strong>التفاعل الصوتي البديهي:</strong> يعتمد التطبيق بشكل كبير على الحوار الصوتي (التعرف على الكلام وتحويل النص إلى كلام) لتمكين الأطفال الصغار، الذين قد لا يجيدون القراءة والكتابة بعد، من التفاعل بسهولة.</li>
+                    <li><strong>نظام تتبع التقدم:</strong> يسجل التطبيق أداء كل طفل في الأنشطة (الإجابات، الوقت المستغرق، المحاولات) ويحول هذه البيانات إلى تقارير مفيدة للمعلمة.</li>
+                    <li><strong>ركن الدردشة الذكي (اختياري ومراقب):</strong> قسم إضافي يتيح للأطفال فرصة التحدث بحرية (ضمن حدود آمنة ومراقبة) مع نموذج لغوي كبير (مثل Gemini أو ChatGPT)، مما يعزز مهارات التواصل والفضول لديهم.</li>
+                </ul>
+            </article>
+
+            <article id="app-goals">
+                <h3>2.2 أهداف التطبيق</h3>
+                 <p>يسعى تطبيق "واعي" لتحقيق الأهداف التالية:</p>
+                <ul>
+                    <li><strong>تقديم تجربة تعليمية ممتعة:</strong> تحويل التعلم إلى لعبة شيقة من خلال التفاعل مع شخصية "واعي" والأنشطة الجذابة.</li>
+                    <li><strong>تنمية الوعي الرقمي المبكر:</strong> تعريف الأطفال بمفاهيم أساسية حول الاستخدام الآمن والمسؤول للتكنولوجيا.</li>
+                    <li><strong>تمكين المعلمات:</strong> منحهن القدرة على تصميم ومراقبة رحلة تعلم مخصصة لكل طفل أو لمجموعة من الأطفال.</li>
+                    <li><strong>توفير تقييم فعال:</strong> مساعدة المعلمات على فهم نقاط القوة والضعف لدى كل طفل بشكل دقيق من خلال التقارير وتحليلات الذكاء الاصطناعي.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="audience">
+            <h2>3. الجمهور المستهدف</h2>
+             <p>تم تصميم التطبيق لخدمة فئتين رئيسيتين:</p>
+            <ul>
+                <li><strong>الأطفال:</strong> في مرحلة رياض الأطفال، تحديداً الأعمار بين 4 و 6 سنوات، وهم في مرحلة حساسة لتكوين المفاهيم والمهارات الأساسية.</li>
+                <li><strong>المعلمات:</strong> معلمات رياض الأطفال اللاتي يبحثن عن أدوات تكنولوجية حديثة لدعم العملية التعليمية، وتخصيص المحتوى، وتتبع أداء الأطفال بكفاءة.</li>
+            </ul>
+        </section>
+
+        <section id="screens">
+            <h2>4. الشاشات الرئيسية وتفاصيلها</h2>
+
+            <article id="teacher-interface">
+                <h3>4.1 واجهة المعلمة (لوحة التحكم)</h3>
+                 <p>هذه الواجهة هي مركز التحكم الخاص بالمعلمة، مصممة لتكون سهلة الاستخدام وفعالة.</p>
+
+                 <h4>4.1.1 تسجيل الدخول الآمن</h4>
+                 <ul>
+                     <li><strong>الآلية:</strong> يتم الدخول باستخدام رمز PIN (رقم تعريف شخصي) بسيط يتم تعيينه لكل معلمة.</li>
+                     <li><strong>الهدف:</strong> ضمان وصول المعلمة المصرح لها فقط إلى بيانات طلابها وأنشطتها، مع الحفاظ على بساطة عملية الدخول مقارنة بكلمات المرور المعقدة.</li>
+                 </ul>
+
+                 <h4>4.1.2 إدارة الأنشطة التعليمية</h4>
+                 <p>توفر هذه الوظيفة المرونة الكاملة للمعلمة لإنشاء وتعديل المحتوى التعليمي.</p>
+                 <h5>خطوات إنشاء/تعديل نشاط:</h5>
+                 <ol>
+                     <li class="step">الضغط على زر "إضافة نشاط جديد" أو اختيار نشاط موجود من القائمة لتعديله.</li>
+                     <li class="step">تعبئة الحقول الأساسية للنشاط:
+                         <ul>
+                             <li><strong>اسم النشاط:</strong> عنوان واضح ومميز (مثال: "التعرف على الأشكال الهندسية").</li>
+                             <li><strong>سؤال/موضوع اليوم:</strong> المحور الرئيسي الذي يركز عليه النشاط (مثال: "ما هو شكل الدائرة؟").</li>
+                             <li><strong>الأهداف التعليمية:</strong> تحديد المهارات أو المعارف التي يُتوقع أن يكتسبها الطفل (مثال: "أن يميز الطفل بين الدائرة والمربع", "أن يربط الشكل باسمه").</li>
+                         </ul>
+                     </li>
+                     <li class="step">إضافة الأسئلة والتفاعلات:
+                         <ul>
+                             <li><strong>أنواع الأسئلة المتاحة:</strong>
+                                 <ul>
+                                     <li><strong>اختيار من متعدد:</strong> مناسب لتقييم المعرفة المباشرة (عرض صور/نصوص واختيار الإجابة الصحيحة).</li>
+                                     <li><strong>صح/خطأ:</strong> لتقييم الفهم البسيط للمفاهيم.</li>
+                                     <li><strong>حوار تفاعلي:</strong> أسئلة مفتوحة تعتمد على ردود صوتية من الطفل، يتم تحليلها (بمساعدة AI لاحقًا) أو مراجعتها من قبل المعلمة.</li>
+                                 </ul>
+                             </li>
+                             <li><strong>تحديد الإجابات والنقاط:</strong> للمعلمة تحديد الإجابة (أو الإجابات) الصحيحة وتعيين نقاط اختيارية لكل سؤال لقياس التقدم.</li>
+                             <li><strong>إضافة تغذية راجعة مخصصة (Feedback):</strong>
+                                 <ul>
+                                     <li><strong>للإجابة الصحيحة:</strong> كتابة رسالة تشجيعية مثل "رائع! إجابتك صحيحة." أو إضافة معلومة إضافية بسيطة. <em>(مثال: "نعم، هذه دائرة! الكرة تشبه الدائرة.")</em></li>
+                                     <li><strong>للإجابة الخاطئة:</strong> تقديم تلميح لطيف أو إعادة شرح مبسطة للمفهوم. <em>(مثال: "هذا مربع، حاول البحث عن الشكل الذي ليس له زوايا.")</em></li>
+                                 </ul>
+                                 <div class="explanation"><p><strong>أهمية التغذية الراجعة:</strong> تساعد الطفل على الفهم الفوري وتصحيح المفاهيم الخاطئة، كما تعزز الدافعية عند تلقي التشجيع.</p></div>
+                             </li>
+                         </ul>
+                     </li>
+                     <li class="step">إضافة الوسائط المتعددة:
+                         <ul>
+                             <li>يمكن للمعلمة رفع <strong>صور</strong> (JPG, PNG) أو <strong>مقاطع فيديو قصيرة</strong> (MP4) أو كتابة <strong>نصوص إرشادية</strong> بسيطة لعرضها ضمن النشاط.</li>
+                             <li><strong>الهدف:</strong> جعل النشاط أكثر جاذبية وتوضيح المفاهيم بشكل بصري وسمعي.</li>
+                         </ul>
+                     </li>
+                     <li class="step">حفظ النشاط ليصبح متاحًا للأطفال.</li>
+                 </ol>
+
+                 <h4>4.1.3 عرض التقارير وتحليلها</h4>
+                 <p>تمكن هذه الميزة المعلمة من متابعة أداء الطلاب بشكل فعال.</p>
+                 <ul>
+                     <li><strong>مراجعة النتائج:</strong> عرض تقارير تفصيلية تظهر أداء كل طفل في كل نشاط (الأسئلة التي أجاب عليها، الإجابات الصحيحة/الخاطئة، النقاط المكتسبة، الوقت المستغرق).</li>
+                     <li><strong>أنواع التقارير:</strong> إمكانية عرض تقرير فردي مفصل لكل طفل، أو تقرير مجمع يظهر نظرة عامة على أداء الصف بأكمله في نشاط معين.</li>
+                     <li><strong>تصدير التقارير:</strong> القدرة على حفظ التقارير كملفات <strong>PDF</strong> (لمشاركتها مع الإدارة أو أولياء الأمور أو للطباعة) أو <strong>Excel</strong> (لإجراء تحليلات إضافية إذا رغبت المعلمة).</li>
+                     <li><strong>تتبع تحقيق الأهداف:</strong> ربط أداء الطفل في الأسئلة بالأهداف التعليمية المحددة للنشاط، مما يوضح مدى اكتساب الطفل للمهارات المستهدفة.</li>
+                 </ul>
+
+                 <h4>4.1.4 دور الذكاء الاصطناعي في التقارير</h4>
+                 <p>يمكن للذكاء الاصطناعي تعزيز قيمة التقارير بشكل كبير:</p>
+                 <ul>
+                     <li><strong>التحليل المتقدم:</strong> تحليل أنماط إجابات الطفل (مثل أنواع الأسئلة التي يخطئ فيها باستمرار، الوقت المستغرق مقارنة بالمتوسط) لتحديد نقاط القوة ومواطن الصعوبة بدقة أكبر مما يمكن ملاحظته يدويًا.</li>
+                     <li><strong>تخصيص الرؤى:</strong> بناءً على التحليل، يمكن للنظام تقديم ملخصات ذكية للمعلمة تسلط الضوء على الأطفال الذين يحتاجون دعمًا إضافيًا في مجالات معينة، أو اقتراح أنشطة تالية مناسبة لمستوى الطفل.</li>
+                     <li><strong>التصور البياني:</strong> تحويل البيانات الرقمية إلى رسوم بيانية سهلة القراءة (مثل مخططات التقدم، مقارنات الأداء) لمساعدة المعلمة على فهم الصورة الكلية بسرعة.</li>
+                 </ul>
+                 <div class="explanation">
+                     <p><strong>مثال:</strong> قد يلاحظ النظام أن طفلاً ما يجيب بسرعة وبشكل خاطئ على أسئلة التمييز البصري. يمكن للتقرير الذكي أن ينبه المعلمة لهذه الملاحظة ويقترح أنشطة إضافية تركز على التركيز البصري لهذا الطفل.</p>
+                 </div>
+
+                 <h4>4.1.5 إنشاء ملفات PDF للتقارير (باستخدام MIT App Inventor كمثال)</h4>
+                 <p>إذا تم بناء التطبيق باستخدام MIT App Inventor، يمكن تحقيق تصدير PDF كالتالي:</p>
+                 <ol>
+                     <li class="step"><strong>تصميم شاشة التقرير في App Inventor:</strong> إنشاء واجهة مرئية للتقرير باستخدام مكونات مثل `Label` لعرض النصوص، `ListView` لعرض قوائم النتائج، و `Image` لعرض الصور أو الرسوم البيانية المولدة.</li>
+                     <li class="step"><strong>استخدام إضافة (Extension) لإنشاء PDF:</strong> البحث عن واستخدام إضافة متخصصة لـ App Inventor تسمح بإنشاء ملفات PDF برمجياً (هناك عدة إضافات متاحة من مجتمع المطورين).</li>
+                     <li class="step"><strong>برمجة محتوى الـ PDF:</strong> باستخدام كتل الأوامر (Blocks) في App Inventor، يتم تحديد هيكل الملف (عناوين، فقرات، جداول) ثم استرداد البيانات المطلوبة (اسم الطفل، نتائج النشاط، إلخ) من قاعدة البيانات أو متغيرات التطبيق وإدراجها في الأماكن المحددة داخل الـ PDF.</li>
+                     <li class="step"><strong>حفظ أو مشاركة الـ PDF:</strong> بعد إنشاء الملف، تتيح الإضافة حفظه في مساحة تخزين الجهاز أو توفير خيار لمشاركته عبر تطبيقات أخرى (مثل البريد الإلكتروني أو واتساب).</li>
+                 </ol>
+            </article>
+
+            <article id="child-interface">
+                <h3>4.2 واجهة الطفل (محطة واعي)</h3>
+                <p>هذه الواجهة مصممة لتكون عالم الطفل داخل التطبيق، مليئة بالألوان والأصوات والتفاعلات البسيطة.</p>
+
+                 <h4>4.2.1 شاشة الترحيب الجذابة</h4>
+                 <ul>
+                     <li><strong>التصميم:</strong> عند فتح التطبيق، تظهر شخصية "واعي" الكرتونية مع رسوم متحركة بسيطة وموسيقى خلفية مبهجة ولطيفة.</li>
+                     <li><strong>التخصيص:</strong> إذا كان ملف الطفل مسجلاً، يمكن لـ "واعي" نطق اسم الطفل بصوت ودود ("أهلاً بك يا [اسم الطفل]!") مما يزيد من شعوره بالارتباط بالتطبيق.</li>
+                     <li><strong>التوجيه:</strong> تقدم الشاشة خيارات واضحة وبسيطة (على شكل أزرار كبيرة أو أيقونات) مثل "لنبدأ اللعب!" أو "استكشاف الأنشطة".</li>
+                     <li><strong>الهدف:</strong> جذب انتباه الطفل فورًا وخلق انطباع إيجابي ومحفز.</li>
+                 </ul>
+
+                 <h4>4.2.2 التفاعل الصوتي الرئيسي</h4>
+                 <ul>
+                     <li><strong>الحوار:</strong> "واعي" يتحدث إلى الطفل بصوت واضح ومناسب لعمره، يطرح الأسئلة المتعلقة بالنشاط الحالي ويقدم الإرشادات.</li>
+                     <li><strong>الاستجابة:</strong> التطبيق يستمع لردود الطفل الصوتية (باستخدام تقنية التعرف على الكلام).</li>
+                     <li><strong>البساطة:</strong> يتم استخدام جمل قصيرة وأسئلة مباشرة ومفردات يفهمها أطفال الروضة.</li>
+                     <li><strong>الصبر:</strong> يمنح التطبيق الطفل وقتًا كافيًا للتفكير والإجابة دون استعجال.</li>
+                     <li><strong>الدعم:</strong> إذا لم يجب الطفل أو بدا مترددًا، يمكن لـ "واعي" تقديم تشجيع ("خذ وقتك في التفكير") أو تلميح بسيط (إذا قامت المعلمة بإعداده).</li>
+                     <li><strong>المؤثرات الصوتية:</strong> استخدام أصوات ممتعة (مثل صوت نجاح عند الإجابة الصحيحة، أو صوت تفكير عند طرح سؤال) لزيادة التفاعل.</li>
+                 </ul>
+                 <div class="explanation"><p><strong>كيف يعمل التفاعل الصوتي (بشكل مبسط):</strong> 1. "واعي" يتحدث (تحويل النص إلى كلام TTS). 2. الطفل يرد (صوت). 3. الميكروفون يلتقط الصوت. 4. خدمة التعرف على الكلام (STT) تحول الصوت إلى نص. 5. التطبيق يحلل النص (يقارنه بالإجابة المتوقعة أو يرسله للـ AI). 6. "واعي" يرد بناءً على التحليل (TTS).</p></div>
+
+                 <h4>4.2.3 عرض الوسائط المتعددة</h4>
+                 <ul>
+                     <li><strong>العرض المتكامل:</strong> يتم عرض الصور ومقاطع الفيديو التي أضافتها المعلمة كجزء من النشاط في الوقت المناسب (مثال: عرض صورة قطة عند السؤال عن صوت القطة).</li>
+                     <li><strong>الجودة والجاذبية:</strong> يتم التركيز على استخدام صور ملونة وواضحة ورسوم متحركة بسيطة، ومقاطع فيديو قصيرة ومناسبة لمدى انتباه الأطفال.</li>
+                     <li><strong>التفاعل البسيط:</strong> إمكانية تكبير الصورة عند النقر عليها لمشاهدتها بشكل أوضح.</li>
+                     <li><strong>الهدف:</strong> دعم الفهم البصري والسمعي وجعل المحتوى التعليمي أكثر حيوية.</li>
+                 </ul>
+
+                 <h4>4.2.4 شاشة التعزيز الإيجابي</h4>
+                 <ul>
+                     <li><strong>الاحتفال بالإنجاز:</strong> بعد إكمال نشاط أو الإجابة بشكل صحيح على سؤال مهم، تظهر شاشة خاصة للاحتفال.</li>
+                     <li><strong>العناصر:</strong> قد تتضمن رسوم متحركة لشخصية "واعي" وهي سعيدة (تقفز، تصفق)، نطق عبارات تشجيعية ("أحسنت!", "لقد فعلتها!"), عرض النجوم أو النقاط التي حصل عليها الطفل، أو مؤثرات صوتية احتفالية.</li>
+                     <li><strong>الهدف:</strong> تعزيز السلوك الإيجابي (المحاولة والتعلم) وتشجيع الطفل على الاستمرار والمشاركة في الأنشطة التالية.</li>
+                     <li><strong>المشاركة (اختياري):</strong> قد يضاف زر بسيط لمشاركة هذا "الإنجاز" (مثل الحصول على 3 نجوم) مع المعلمة أو ولي الأمر كرسالة بسيطة.</li>
+                 </ul>
+            </article>
+        </section>
+
+        <section id="workflow">
+            <h2>5. سير العمل النموذجي</h2>
+            <p>يوضح هذا القسم الخطوات المتسلسلة التي يتبعها كل من المعلمة والطفل عند استخدام التطبيق.</p>
+
+            <article id="teacher-workflow">
+                <h3>5.1 سير عمل المعلمة (إعداد المحتوى والمتابعة)</h3>
+                <ol>
+                    <li class="step"><strong>تسجيل الدخول:</strong> تفتح المعلمة التطبيق وتدخل رمز PIN الخاص بها للوصول إلى لوحة التحكم.</li>
+                    <li class="step"><strong>اختيار الإجراء:</strong> تقرر إما إنشاء نشاط جديد، أو تعديل نشاط سابق، أو مراجعة تقارير الطلاب.</li>
+                    <li class="step"><strong>إنشاء/تعديل نشاط (إذا تم اختياره):</strong>
+                        <ul>
+                            <li>تتبع الخطوات المفصلة في قسم <strong>4.1.2 إدارة الأنشطة التعليمية</strong> (تحديد التفاصيل، إضافة الأسئلة، تحديد الإجابات والfeedback، تحميل الوسائط).</li>
+                            <li>تحفظ النشاط ليصبح متاحًا للطلاب المحددين.</li>
+                        </ul>
+                    </li>
+                    <li class="step"><strong>مراجعة التقارير (إذا تم اختياره):</strong>
+                        <ul>
+                            <li>تنتقل إلى قسم التقارير.</li>
+                            <li>تختار عرض تقرير طالب معين أو نشاط معين.</li>
+                            <li>تحلل البيانات المعروضة (ربما بمساعدة رؤى الذكاء الاصطناعي).</li>
+                            <li>يمكنها تصدير التقرير كملف PDF أو Excel إذا لزم الأمر.</li>
+                        </ul>
+                    </li>
+                    <li class="step"><strong>تسجيل الخروج:</strong> تنهي المعلمة جلستها.</li>
+                </ol>
+            </article>
+
+            <article id="child-workflow">
+                <h3>5.2 سير عمل الطفل (التفاعل والتعلم)</h3>
+                <ol>
+                    <li class="step"><strong>فتح التطبيق:</strong> يقوم الطفل (أو بمساعدة شخص بالغ) بفتح تطبيق "واعي" على الجهاز اللوحي أو الهاتف.</li>
+                    <li class="step"><strong>الترحيب:</strong> تستقبله شاشة الترحيب بشخصية "واعي" (قد تنطق اسمه).</li>
+                    <li class="step"><strong>بدء النشاط:</strong> يختار الطفل بدء نشاط جديد أو استكمال نشاط سابق (إذا كان متاحاً).</li>
+                    <li class="step"><strong>التفاعل مع "واعي":</strong>
+                        <ul>
+                             <li>يستمع الطفل إلى توجيهات "واعي" والأسئلة المطروحة صوتياً.</li>
+                             <li>يشاهد الوسائط المعروضة (صور/فيديو) المتعلقة بالسؤال.</li>
+                             <li>يجيب على الأسئلة صوتياً (أو بالنقر على خيارات إذا كان السؤال من نوع اختيار من متعدد مرئي).</li>
+                         </ul>
+                    </li>
+                    <li class="step"><strong>تلقي التغذية الراجعة:</strong>
+                        <ul>
+                             <li>إذا كانت الإجابة صحيحة، يتلقى تشجيعاً وتعزيزاً إيجابياً من "واعي".</li>
+                             <li>إذا كانت الإجابة خاطئة، يقدم "واعي" التوضيح أو التلميح الذي أعدته المعلمة.</li>
+                         </ul>
+                    </li>
+                    <li class="step"><strong>الاستمرار في النشاط:</strong> يواصل الطفل التفاعل مع الأسئلة والأنشطة الفرعية حتى نهاية النشاط المحدد.</li>
+                    <li class="step"><strong>ملخص ونهاية النشاط:</strong> في نهاية النشاط، قد يقدم "واعي" ملخصاً بسيطاً لما تم تعلمه ويعرض النتيجة النهائية (مثل عدد النجوم). تظهر شاشة التعزيز النهائية.</li>
+                    <li class="step"><strong>الخروج أو اختيار نشاط آخر:</strong> يمكن للطفل إغلاق التطبيق أو اختيار نشاط آخر إذا كان متاحًا ومسموحًا به.</li>
+                </ol>
+            </article>
+        </section>
+
+        <section id="ai">
+            <h2>6. دور وتطبيق نموذج الذكاء الاصطناعي</h2>
+             <p>يلعب الذكاء الاصطناعي دوراً محورياً في جعل "واعي" تطبيقاً ذكياً ومتكيفاً.</p>
+
+            <article id="chat-integration">
+                <h3>6.1 تكامل نموذج الدردشة (LLM)</h3>
+                 <p>يمكن دمج نماذج لغوية كبيرة (Large Language Models - LLMs) مثل ChatGPT أو Gemini لتعزيز قدرات "واعي" الحوارية.</p>
+                <ul>
+                    <li><strong>الوظيفة الأساسية:</strong> تمكين "واعي" من فهم أسئلة الطفل غير المتوقعة أو تعليقاته بشكل أفضل، وتوليد ردود طبيعية وديناميكية تتجاوز مجرد النصوص المبرمجة مسبقًا. يمكن استخدامه في ركن الدردشة الممتع أو للمساعدة في شرح المفاهيم بطرق مختلفة.</li>
+                    <li><strong>آلية العمل (مبسطة):</strong>
+                        <ol>
+                             <li>عندما يتحدث الطفل (خاصة في وضع الحوار المفتوح أو عند طرح سؤال غير متوقع)، يتم تحويل كلامه إلى نص (STT).</li>
+                             <li>يتم إرسال هذا النص، مع <strong>سياق المحادثة</strong> (مثل النشاط الحالي، الأهداف التعليمية، مستوى الطفل التقريبي، الردود السابقة)، كـ "طلب" (Prompt) إلى واجهة برمجة التطبيقات (API) الخاصة بالنموذج اللغوي الكبير.</li>
+                             <li>يقوم النموذج اللغوي بتحليل الطلب والسياق ويولد ردًا نصيًا مناسبًا.</li>
+                             <li>يتم استلام الرد النصي من النموذج.</li>
+                             <li><strong>(خطوة حاسمة)</strong> يتم تطبيق <strong>طبقة تصفية وأمان</strong> على الرد للتأكد من أنه مناسب تمامًا لعمر الطفل وخالٍ من أي محتوى غير لائق أو معقد.</li>
+                             <li>يتم تحويل النص المصفى إلى كلام (TTS) وتنطقه شخصية "واعي".</li>
+                        </ol>
+                    </li>
+                     <li><strong>الاحتياطات والضوابط:</strong>
+                         <ul>
+                             <li><strong>تصفية صارمة للمحتوى:</strong> يجب تصميم نظام فلترة قوي لمنع أي ردود غير مناسبة من النموذج اللغوي. قد يتضمن ذلك قوائم كلمات محظورة، تحليل المشاعر، وتصنيف المحتوى.</li>
+                             <li><strong>توجيه النموذج (Prompt Engineering):</strong> يجب صياغة الطلبات المرسلة للنموذج بعناية لتوجيهه نحو تقديم ردود تعليمية، بسيطة، ومشجعة.</li>
+                             <li><strong>النظام الاحتياطي (Fallback):</strong> في حالة فشل الاتصال بالنموذج اللغوي (مشكلة في الإنترنت أو في الخدمة السحابية)، يجب أن يكون لدى التطبيق ردود بديلة جاهزة ومناسبة (مثل "لم أفهم سؤالك جيدًا، هل يمكنك المحاولة مرة أخرى؟" أو "لنتحدث عن هذا لاحقًا.").</li>
+                         </ul>
+                    </li>
+                </ul>
+                 <div class="explanation"><p><strong>الفائدة:</strong> يجعل التفاعل أكثر طبيعية وجاذبية للطفل، ويفتح إمكانيات لشرح المفاهيم بطرق متعددة.</p></div>
+            </article>
+
+            <article id="adaptation">
+                <h3>6.2 التكيف مع مستوى الطفل</h3>
+                <p>يهدف التطبيق إلى تقديم تجربة تعليمية ليست سهلة جدًا ولا صعبة جدًا، بل مناسبة تمامًا لمستوى كل طفل.</p>
+                <ul>
+                    <li><strong>آلية التكيف:</strong>
+                        <ul>
+                             <li><strong>تحليل الأداء المستمر:</strong> يقوم النظام بتتبع أداء الطفل في الأنشطة (نسبة الإجابات الصحيحة، السرعة، الحاجة للمساعدة).</li>
+                             <li><strong>تعديل الصعوبة الديناميكي:</strong>
+                                 <ul>
+                                     <li>إذا أظهر الطفل إتقانًا لمفهوم معين (إجابات صحيحة متتالية وسريعة)، يمكن للتطبيق تلقائيًا تقديم أسئلة أكثر تحديًا حول نفس المفهوم أو الانتقال إلى المفهوم التالي في التسلسل التعليمي الذي حددته المعلمة.</li>
+                                     <li>إذا واجه الطفل صعوبة مستمرة، يمكن للتطبيق تقديم تلميحات إضافية، أو تقسيم السؤال إلى خطوات أبسط، أو إعادة تقديم المفهوم بأسلوب مختلف (باستخدام وسائط متعددة أخرى أو شرح مبسط)، أو اقتراح العودة إلى نشاط تمهيدي سابق.</li>
+                                 </ul>
+                             </li>
+                             <li><strong>مراعاة نمط التعلم (مستقبلي):</strong> يمكن تطوير النظام لاحقًا ليلاحظ تفضيلات الطفل (هل يتفاعل بشكل أفضل مع الصور؟ الفيديوهات؟ الأغاني؟) ويحاول تقديم المحتوى بالشكل المفضل لديه.</li>
+                        </ul>
+                    </li>
+                    <li><strong>دور المعلمة:</strong> لا يزال بإمكان المعلمة تجاوز التكيف التلقائي وتحديد مسار تعليمي معين أو مستوى صعوبة محدد لطفل ما بناءً على معرفتها به.</li>
+                </ul>
+                 <div class="explanation"><p><strong>الهدف:</strong> الحفاظ على دافعية الطفل وتجنب شعوره بالإحباط (إذا كان المحتوى صعبًا جدًا) أو الملل (إذا كان سهلاً جدًا).</p></div>
+            </article>
+        </section>
+
+        <section id="tech">
+            <h2>7. المتطلبات التقنية الأساسية</h2>
+            <p>لبناء تطبيق "واعي" بالمواصفات المذكورة، نحتاج إلى مجموعة من التقنيات والأدوات:</p>
+            <ul>
+                 <li><strong>منصة تطوير التطبيقات:</strong>
+                     <ul>
+                         <li><strong>MIT App Inventor أو Kodular:</strong> خيارات ممتازة للنماذج الأولية والتطوير السريع، خاصة إذا كان فريق التطوير لديه خبرة محدودة في البرمجة التقليدية. توفر بيئة تطوير مرئية (Block-based) وتدعم العديد من الميزات المطلوبة (واجهات المستخدم، الصوت، الاتصال بالويب).</li>
+                         <li><em>بدائل (لتطوير أكثر تقدمًا):</em> يمكن استخدام أطر عمل مثل React Native, Flutter, أو التطوير الأصلي (Native Android/iOS) للحصول على أداء أعلى وتحكم أكبر، ولكن يتطلب خبرة برمجية أعمق.</li>
+                     </ul>
+                 </li>
+                 <li><strong>قاعدة البيانات السحابية:</strong>
+                     <ul>
+                         <li><strong>Firebase Firestore:</strong> قاعدة بيانات NoSQL مرنة وقابلة للتوسع، مناسبة جدًا لهيكل البيانات المقترح (مستندات ومجموعات فرعية). توفر مزامنة في الوقت الفعلي (Real-time synchronization) وقواعد أمان قوية (Firebase Rules) لعزل بيانات المعلمات.</li>
+                         <li><em>السبب:</em> سهولة التكامل مع تطبيقات الهاتف المحمول، نموذج تسعير مرن (يبدأ مجانيًا)، وقدرات ممتازة للتعامل مع البيانات غير المهيكلة نسبيًا.</li>
+                     </ul>
+                 </li>
+                 <li><strong>تقنيات الصوت (Cloud-based):</strong>
+                     <ul>
+                         <li><strong>التعرف على الكلام (Speech-to-Text - STT):</strong> خدمات مثل Google Cloud Speech-to-Text لتحويل كلام الطفل المنطوق إلى نص يمكن للتطبيق تحليله.</li>
+                         <li><strong>تحويل النص إلى كلام (Text-to-Speech - TTS):</strong> خدمات مثل Google Cloud Text-to-Speech لتحويل ردود التطبيق النصية إلى كلام منطوق بصوت "واعي".</li>
+                         <li><em>السبب:</em> هذه الخدمات السحابية توفر دقة عالية وتدعم اللغة العربية بلهجات مختلفة، وتزيح عبء المعالجة المعقدة عن جهاز الطفل.</li>
+                     </ul>
+                 </li>
+                 <li><strong>واجهة برمجة تطبيقات نموذج اللغة الكبير (LLM API):</strong>
+                     <ul>
+                         <li>واجهة برمجة تطبيقات لخدمة مثل Google Gemini API أو OpenAI API (ChatGPT) إذا تم تضمين ميزة الدردشة الذكية أو الردود الديناميكية.</li>
+                     </ul>
+                 </li>
+                 <li><strong>تصميم واجهة المستخدم (UI) وتجربة المستخدم (UX):</strong>
+                     <ul>
+                         <li>يجب أن يكون التصميم <strong>جذابًا بصريًا للأطفال</strong> (ألوان زاهية، رسوم كرتونية، خطوط كبيرة وواضحة).</li>
+                         <li>يجب أن تكون عناصر التحكم (الأزرار، الأيقونات) <strong>كبيرة وسهلة النقر</strong> عليها بأصابع صغيرة.</li>
+                         <li>يجب أن تكون التجربة <strong>بديهية وبسيطة</strong> قدر الإمكان لتقليل الحاجة إلى مساعدة الكبار.</li>
+                     </ul>
+                 </li>
+                 <li><strong>الأمان والخصوصية:</strong>
+                     <ul>
+                         <li><strong>التشفير:</strong> تشفير البيانات الحساسة (مثل بيانات تعريف الأطفال، رموز PIN للمعلمات) سواء أثناء النقل (using HTTPS/SSL) أو التخزين (at rest).</li>
+                         <li><strong>نظام الصلاحيات:</strong> استخدام قواعد الأمان في Firebase Firestore لضمان أن المعلمة لا يمكنها الوصول إلا لبيانات طلابها، وأن الطفل لا يمكنه الوصول إلا للأنشطة المخصصة له.</li>
+                     </ul>
+                 </li>
+                 <li><strong>(اختياري) دمج الكاميرا:</strong>
+                      <ul>
+                          <li>إذا كانت هناك حاجة لالتقاط صور (مثلاً، كجزء من نشاط يتطلب تصوير شيء ما أو كصورة رمزية للطفل)، سيتم استخدام واجهة برمجة تطبيقات الكاميرا الخاصة بنظام التشغيل (Android/iOS)، مع طلب الأذونات اللازمة من المستخدم بوضوح.</li>
+                          <li><strong>اعتبارات الخصوصية:</strong> يجب التعامل مع الصور الملتقطة بحذر شديد، وتوضيح كيفية استخدامها وتخزينها، والحصول على موافقة واضحة.</li>
+                      </ul>
+                 </li>
+            </ul>
+        </section>
+
+         <section id="security">
+             <h2>8. الجوانب الأمنية والخصوصية (تفصيل)</h2>
+              <p>نظرًا لأن التطبيق يتعامل مع بيانات أطفال، فإن الأمان والخصوصية لهما أولوية قصوى.</p>
+             <ul>
+                 <li><strong>تشفير البيانات:</strong>
+                     <ul>
+                         <li><strong>أثناء النقل (In Transit):</strong> يجب أن تتم جميع الاتصالات بين التطبيق والخوادم (Firebase, Google Cloud AI APIs) عبر بروتوكول HTTPS الآمن لمنع التنصت.</li>
+                         <li><strong>أثناء التخزين (At Rest):</strong> يجب تشفير البيانات الحساسة المخزنة في قاعدة البيانات Firestore، خاصة المعلومات الشخصية ورموز PIN. Firebase يوفر تشفيرًا على مستوى الخادم بشكل افتراضي، ولكن يمكن إضافة طبقة تشفير إضافية على مستوى التطبيق للبيانات الأكثر حساسية قبل إرسالها إلى Firestore.</li>
+                     </ul>
+                 </li>
+                 <li><strong>التحكم في الوصول (Access Control):</strong>
+                     <ul>
+                         <li><strong>مصادقة المعلمة:</strong> التحقق من هوية المعلمة عند تسجيل الدخول (باستخدام PIN أو طرق أخرى أكثر أمانًا إذا لزم الأمر لاحقًا).</li>
+                         <li><strong>قواعد أمان Firestore:</strong> كتابة قواعد دقيقة في Firebase Firestore تضمن أن المستخدم المصادق عليه (المعلمة) يمكنه فقط قراءة وكتابة البيانات ضمن المستند الخاص به (<code>/المعلمات/{teacherId}</code>) والمجموعات الفرعية التابعة له. لا يمكن لمعلمة الوصول لبيانات معلمة أخرى.</li>
+                         <li><strong>وصول الطفل:</strong> قد يتم تصميم وصول الطفل بحيث لا يحتاج إلى مصادقة معقدة، ولكن يتم ربطه بملف تعريف تديره المعلمة، وتضمن قواعد Firestore أنه لا يرى سوى الأنشطة المخصصة له ولا يمكنه تعديل بيانات حساسة.</li>
+                     </ul>
+                 </li>
+                 <li><strong>الحد الأدنى من جمع البيانات (Data Minimization):</strong> جمع وتخزين البيانات الضرورية فقط لعمل التطبيق وتحقيق أهدافه التعليمية. تجنب جمع معلومات شخصية غير ضرورية عن الأطفال.</li>
+                 <li><strong>الشفافية والموافقة:</strong> توفير سياسة خصوصية واضحة وسهلة الفهم تشرح ما هي البيانات التي يتم جمعها، وكيف يتم استخدامها، ومن يمكنه الوصول إليها. يجب الحصول على موافقة صريحة من المدرسة أو أولياء الأمور قبل جمع بيانات الأطفال.</li>
+                 <li><strong>أمان واجهات برمجة التطبيقات (API Security):</strong> تأمين مفاتيح API المستخدمة للوصول إلى خدمات Google Cloud AI أو LLMs لمنع الاستخدام غير المصرح به.</li>
+             </ul>
+         </section>
+
+         <section id="dev-plan">
+             <h2>9. خطة التطوير المقترحة (مراحل)</h2>
+              <p>يمكن تقسيم عملية تطوير التطبيق إلى مراحل لتسهيل الإدارة وتحقيق نتائج تدريجية:</p>
+             <ul>
+                 <li><strong>المرحلة الأولى: الأساسيات وواجهة المعلمة (MVP 1)</strong>
+                     <ul>
+                         <li>تصميم واجهات المستخدم الأولية (UI/UX) لكل من المعلمة والطفل.</li>
+                         <li>تطوير الشاشات الأساسية لواجهة المعلمة (تسجيل الدخول، عرض قائمة الأنشطة، عرض قائمة الطلاب).</li>
+                         <li>تطوير وظائف إدارة الأنشطة الأساسية (إضافة/تعديل نشاط بنوع سؤال واحد بسيط مثل اختيار من متعدد، بدون وسائط متعددة معقدة).</li>
+                         <li>إعداد هيكل قاعدة البيانات الأساسي في Firestore.</li>
+                         <li>دمج تقنيات الصوت الأساسية (TTS لعرض الكلام، وربما STT بسيط بدون تحليل معقد).</li>
+                         <li><strong>الهدف:</strong> الحصول على نسخة أولية قابلة للاختبار للمعلمة لإدخال المحتوى.</li>
+                     </ul>
+                 </li>
+                 <li><strong>المرحلة الثانية: واجهة الطفل والتفاعل الأساسي (MVP 2)</strong>
+                     <ul>
+                         <li>تطوير واجهة الطفل (شاشة الترحيب، عرض الأنشطة).</li>
+                         <li>تفعيل التفاعل الصوتي الأساسي (STT لتحليل الإجابات البسيطة ومقارنتها بالصحيحة).</li>
+                         <li>عرض الوسائط المتعددة (صور) ضمن الأنشطة.</li>
+                         <li>تطوير شاشة التعزيز الإيجابي الأساسية.</li>
+                         <li>بدء تطوير نظام تتبع التقدم الأساسي (تسجيل الإجابات في Firestore).</li>
+                         <li>تطوير وظائف التقارير الأساسية للمعلمة (عرض نتائج الطلاب الأولية).</li>
+                         <li><strong>الهدف:</strong> الحصول على نسخة تسمح للطفل بالتفاعل مع الأنشطة التي أنشأتها المعلمة.</li>
+                     </ul>
+                 </li>
+                 <li><strong>المرحلة الثالثة: الذكاء الاصطناعي والميزات المتقدمة</strong>
+                     <ul>
+                         <li>دمج نموذج اللغة الكبير (LLM) لتحسين الحوار وربما لقسم الدردشة (مع التركيز الشديد على الأمان والفلترة).</li>
+                         <li>تطوير نظام التكيف مع مستوى الطفل (تعديل الصعوبة الديناميكي).</li>
+                         <li>تحسين نظام التقارير باستخدام تحليلات ورؤى الذكاء الاصطناعي.</li>
+                         <li>إضافة دعم لأنواع أسئلة أكثر تعقيدًا ووسائط متعددة (فيديو).</li>
+                         <li>تطوير ميزة تصدير التقارير (PDF/Excel).</li>
+                         <li>إجراء اختبارات مكثفة للأداء والأمان وسهولة الاستخدام مع معلمات وأطفال حقيقيين.</li>
+                         <li><strong>الهدف:</strong> الوصول إلى نسخة كاملة الميزات وقوية من التطبيق.</li>
+                     </ul>
+                 </li>
+                  <li><strong>المرحلة الرابعة: الإطلاق والتحسين المستمر</strong>
+                     <ul>
+                         <li>إطلاق التطبيق رسميًا للمدارس أو المستخدمين المستهدفين.</li>
+                         <li>توفير الدعم الفني والتدريب للمعلمات.</li>
+                         <li>جمع الملاحظات من المستخدمين وتحليل بيانات الاستخدام.</li>
+                         <li>التخطيط لتحديثات مستقبلية بناءً على الملاحظات وإضافة ميزات جديدة أو تحسينات.</li>
+                         <li><strong>الهدف:</strong> ضمان نجاح التطبيق على المدى الطويل وتلبية احتياجات المستخدمين المتطورة.</li>
+                     </ul>
+                 </li>
+             </ul>
+         </section>
+
+         <section id="evaluation">
+             <h2>10. طرق تقييم فعالية التطبيق</h2>
+              <p>للتأكد من أن تطبيق "واعي" يحقق أهدافه بفعالية، سيتم استخدام طرق تقييم متنوعة:</p>
+             <ul>
+                 <li><strong>اختبارات قابلية الاستخدام (Usability Testing):</strong>
+                     <ul>
+                         <li>ملاحظة معلمات وأطفال حقيقيين أثناء استخدامهم للتطبيق لأداء مهام محددة (مثل إنشاء نشاط، الإجابة على أسئلة).</li>
+                         <li>تحديد نقاط الصعوبة أو الارتباك في الواجهات وسير العمل.</li>
+                         <li>جمع ملاحظات مباشرة منهم حول سهولة الاستخدام وجاذبية التصميم.</li>
+                     </ul>
+                 </li>
+                 <li><strong>تحليل بيانات الاستخدام (Analytics):</strong>
+                     <ul>
+                         <li>تتبع مقاييس كمية مثل: عدد الأنشطة المكتملة، متوسط الوقت المستغرق في النشاط، نسبة الإجابات الصحيحة، الميزات الأكثر استخدامًا، معدلات الاحتفاظ بالمستخدمين (Retention).</li>
+                         <li>تحليل هذه البيانات لتحديد مدى تفاعل الأطفال والمعلمات مع التطبيق وفعالية الأنشطة التعليمية.</li>
+                     </ul>
+                 </li>
+                 <li><strong>استطلاعات الرأي والمقابلات:</strong>
+                     <ul>
+                         <li>إجراء استبيانات منظمة للمعلمات (وربما أولياء الأمور) لجمع آرائهم حول تأثير التطبيق على تعلم الأطفال، وسهولة استخدامه، ومدى تلبيته لاحتياجاتهم.</li>
+                         <li>إجراء مقابلات معمقة مع عينة من المعلمات لفهم تجاربهم وتحدياتهم واقتراحاتهم بشكل أفضل.</li>
+                     </ul>
+                 </li>
+                 <li><strong>تقييم الأثر التعليمي (Pilot Studies):</strong>
+                     <ul>
+                         <li>إجراء دراسات تجريبية صغيرة في فصول دراسية حقيقية، ربما بمقارنة مجموعة تستخدم التطبيق مع مجموعة ضابطة لا تستخدمه.</li>
+                         <li>قياس التقدم في المهارات المستهدفة (مثل الوعي الرقمي، التعرف على الحروف/الأرقام) قبل وبعد استخدام التطبيق لتقييم تأثيره الفعلي على التعلم.</li>
+                     </ul>
+                 </li>
+             </ul>
+              <div class="explanation"><p><strong>الهدف من التقييم المستمر:</strong> ليس فقط الحكم على نجاح التطبيق، بل الحصول على رؤى قيمة لتوجيه عملية التحسين والتطوير المستقبلية.</p></div>
+         </section>
+
+        <section id="db">
+            <h2>11. هيكلة قاعدة البيانات في Firebase Firestore (تفصيل)</h2>
+
+             <article id="db-design">
+                 <h3>11.1 تصميم قاعدة البيانات</h3>
+                 <p>تم اختيار Firebase Firestore لقدرته على التعامل مع هياكل البيانات المتداخلة وتوفير استعلامات مرنة وقواعد أمان قوية. الهيكلة المقترحة تهدف إلى عزل بيانات كل معلمة بشكل فعال.</p>
+                 <ul>
+                     <li><strong>المجموعة الجذر (Root Collection):</strong> <code>المعلمات</code> (Teachers) - تحتوي هذه المجموعة على مستند واحد لكل معلمة مسجلة في النظام.</li>
+                     <li><strong>مستند المعلمة (Teacher Document):</strong> اسم المستند هو المعرف الفريد للمعلمة (<code>Teacher ID</code>). يخزن هذا المستند المعلومات الأساسية للمعلمة (الاسم، رمز PIN مشفر، إلخ).</li>
+                     <li><strong>المجموعات الفرعية (Subcollections) داخل مستند المعلمة:</strong> يتم تخزين جميع البيانات الخاصة بالمعلمة داخل مجموعات فرعية مرتبطة بها مباشرة. هذا يضمن أن استعلامات المعلمة تكون محصورة ضمن بياناتها الخاصة ويُسهل تطبيق قواعد الأمان.
+                        <ul>
+                            <li><code>الطلاب (Students)</code>: مجموعة فرعية تحتوي على مستند لكل طالب مرتبط بهذه المعلمة.</li>
+                            <li><code>الأنشطة (Activities)</code>: مجموعة فرعية تحتوي على مستند لكل نشاط تعليمي أنشأته هذه المعلمة.</li>
+                            <li><code>التقارير (Reports)</code>: مجموعة فرعية تحتوي على مستند لكل نتيجة تفاعل طالب مع نشاط معين لهذه المعلمة.</li>
+                        </ul>
+                     </li>
+                 </ul>
+                 <div class="explanation">
+                     <p><strong>لماذا هذه الهيكلة؟</strong></p>
+                     <ul>
+                         <li><strong>العزل (Isolation):</strong> يضمن أن بيانات معلمة (طلابها، أنشطتها، تقاريرها) منفصلة تمامًا عن بيانات معلمة أخرى على مستوى بنية قاعدة البيانات نفسها.</li>
+                         <li><strong>الأمان (Security):</strong> يسهل كتابة قواعد أمان Firestore التي تمنح المعلمة الإذن بالوصول فقط إلى المستند الخاص بها والمجموعات الفرعية التابعة له (e.g., <code>allow read, write: if request.auth.uid == resource.data.teacherId;</code> for subcollections).</li>
+                         <li><strong>قابلية التوسع (Scalability):</strong> Firestore مصمم للتعامل مع عدد كبير من المستندات والمجموعات. إضافة معلمة جديدة هو مجرد إضافة مستند جديد في المجموعة الجذر.</li>
+                         <li><strong>كفاءة الاستعلام (Query Efficiency):</strong> عندما تستعلم المعلمة عن طلابها أو أنشطتها، يتم البحث فقط داخل مجموعاتها الفرعية، مما يجعل الاستعلامات سريعة وفعالة من حيث التكلفة.</li>
+                     </ul>
+                 </div>
+            </article>
+
+            <article id="db-structure-visual">
+                 <h3>11.2 هيكل البيانات (تصور تفصيلي)</h3>
+                  <p>فيما يلي تصور لكيفية تنظيم البيانات داخل Firestore:</p>
+                 <div class="db-structure">
+                    <ul>
+                        <li><strong>المعلمات (Collection)</strong>
+                            <ul>
+                                <li><strong>TeacherID_1 (Document)</strong> <!-- مستند المعلمة الأولى -->
+                                    <ul>
+                                        <li><span>name: "أ. فاطمة"</span></li>
+                                        <li><span>pinHash: "xyz123abc..."</span> <!-- رمز PIN مشفر --></li>
+                                        <li><span>email: "fatima@school.com" (Optional)</span></li>
+                                        <li><!-- المجموعات الفرعية للمعلمة فاطمة -->
+                                            <ul>
+                                                <li><strong>الطلاب (Subcollection)</strong>
+                                                    <ul>
+                                                        <li><strong>StudentID_A (Document)</strong> <!-- مستند الطالب الأول -->
+                                                            <ul>
+                                                                <li><span>firstName: "أحمد"</span></li>
+                                                                <li><span>lastName: "علي"</span></li>
+                                                                <li><span>profilePicUrl: "url/to/ahmad_pic.jpg" (Optional)</span></li>
+                                                                <li><span>dateOfBirth: Timestamp (Optional)</span></li>
+                                                            </ul>
+                                                        </li>
+                                                         <li><strong>StudentID_B (Document)</strong> <!-- مستند الطالب الثاني -->
+                                                             <ul><li><span>firstName: "سارة"</span></li>...</ul>
+                                                         </li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong>الأنشطة (Subcollection)</strong>
+                                                    <ul>
+                                                        <li><strong>ActivityID_X (Document)</strong> <!-- مستند نشاط الألوان -->
+                                                            <ul>
+                                                                <li><span>name: "نشاط الألوان الأساسية"</span></li>
+                                                                <li><span>description: "التعرف على الأحمر والأزرق والأصفر."</span></li>
+                                                                 <li><span>goals: ["التمييز بين الألوان", "ربط اللون باسمه"]</span></li>
+                                                                 <li><span>topicOfDay: "ما هو لون الموز؟"</span></li>
+                                                                 <li><span>createdAt: Timestamp</span></li>
+                                                                 <li><!-- الأسئلة الخاصة بهذا النشاط -->
+                                                                     <ul>
+                                                                         <li><strong>الأسئلة (Subcollection)</strong>
+                                                                            <ul>
+                                                                                <li><strong>QuestionID_101 (Document)</strong>
+                                                                                    <ul>
+                                                                                        <li><span>type: "multiple_choice"</span></li>
+                                                                                        <li><span>text: "أي من هذه الصور لونه أحمر؟"</span></li>
+                                                                                        <li><span>mediaUrl: ["url/apple.jpg", "url/sky.jpg"] (Optional)</span></li>
+                                                                                        <li><span>options: ["صورة 1", "صورة 2"]</span></li>
+                                                                                         <li><span>correctAnswerIndex: 0</span></li>
+                                                                                         <li><span>points: 5</span></li>
+                                                                                        <li><span>feedbackCorrect: "إجابة ممتازة! التفاح لونه أحمر."</span></li>
+                                                                                        <li><span>feedbackIncorrect: "حاول مرة أخرى. انظر جيدًا للصورة."</span></li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                 <li><strong>QuestionID_102 (Document)</strong>
+                                                                                     <ul><li><span>type: "true_false"</span></li>...</ul>
+                                                                                 </li>
+                                                                            </ul>
+                                                                         </li>
+                                                                     </ul>
+                                                                 </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><strong>ActivityID_Y (Document)</strong> <!-- مستند نشاط الأشكال --></li>
+                                                    </ul>
+                                                </li>
+                                                 <li><strong>التقارير (Subcollection)</strong>
+                                                    <ul>
+                                                        <li><strong>ReportID_ABC (Document)</strong> <!-- نتيجة تفاعل طالب مع نشاط -->
+                                                            <ul>
+                                                                <li><span>studentId: "StudentID_A"</span> <!-- ربط بالطالب -->
+                                                                <li><span>studentName: "أحمد علي" (Denormalized for easier display)</span></li>
+                                                                <li><span>activityId: "ActivityID_X"</span> <!-- ربط بالنشاط -->
+                                                                <li><span>activityName: "نشاط الألوان الأساسية" (Denormalized)</span></li>
+                                                                <li><span>score: 8</span></li>
+                                                                <li><span>totalPossibleScore: 10</span></li>
+                                                                <li><span>timeTakenSeconds: 185</span></li>
+                                                                <li><span>completedAt: Timestamp</span></li>
+                                                                <li><span>answers: [ <!-- تخزين تفاصيل إجابات الطالب -->
+                                                                        { qId: "QuestionID_101", answer: 0, isCorrect: true, time: 30 },
+                                                                        { qId: "QuestionID_102", answer: "false", isCorrect: false, time: 25 }
+                                                                    ]
+                                                                </span></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><strong>ReportID_DEF (Document)</strong></li>
+                                                    </ul>
+                                                 </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>TeacherID_2 (Document)</strong> <!-- مستند المعلمة الثانية -->
+                                    <ul><li><span>name: "أ. ليلى"</span></li>... (لها مجموعاتها الفرعية الخاصة)</ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                 </div>
+                 <div class="explanation">
+                     <p><strong>ملاحظات حول الهيكل:</strong></p>
+                     <ul>
+                         <li><strong>المعرفات الفريدة (IDs):</strong> يُفضل استخدام المعرفات الفريدة التي تولدها Firestore تلقائيًا للمستندات (مثل `TeacherID_1`, `StudentID_A`, `ActivityID_X`) لضمان عدم التضارب.</li>
+                         <li><strong>التكرار المحسوب (Denormalization):</strong> تم تكرار بعض البيانات مثل `studentName` و `activityName` في مستند التقرير. هذا يزيد قليلاً من حجم التخزين ولكنه يُحسّن بشكل كبير من سرعة عرض التقارير، حيث لا نحتاج إلى إجراء استعلامات إضافية لجلب اسم الطالب والنشاط في كل مرة نعرض فيها قائمة التقارير.</li>
+                         <li><strong>الطوابع الزمنية (Timestamps):</strong> استخدام نوع بيانات Timestamp المدمج في Firestore لتسجيل تواريخ الإنشاء والإكمال، مما يسهل فرز البيانات وتتبعها زمنيًا.</li>
+                     </ul>
+                 </div>
+            </article>
+
+            <!-- Sections 11.3 and 11.4 are effectively covered within 11.1 and 11.2 explanations now -->
+
+        </section>
+
+        <section id="conclusion">
+            <h2>12. الخلاصة</h2>
+            <p>يمثل تطبيق "واعي" فرصة واعدة لإثراء التجربة التعليمية لأطفال الروضة في العصر الرقمي. من خلال الدمج المدروس بين المبادئ التربوية، والتصميم التفاعلي الجذاب، وقوة الذكاء الاصطناعي (في التخصيص، الحوار، وتحليل التقدم)، يمكن لـ "واعي" أن يصبح أداة قيمة للمعلمات وشريكًا ممتعًا للأطفال في رحلتهم لاكتساب المعرفة وتطوير الوعي الرقمي والمهارات الأساسية. إن البنية التحتية المقترحة، مع التركيز على الأمان وقابلية التوسع باستخدام Firebase Firestore والخدمات السحابية، توفر أساسًا متينًا لبناء هذا التطبيق الطموح وتطويره مستقبلًا.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 توثيق مفصل لتطبيق "واعي"
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="العودة للأعلى">⇧</button>
+
+    <script>
+        // --- Navigation Active State ---
+        const navLinks = document.querySelectorAll('nav a.nav-link');
+        const sections = document.querySelectorAll('main section[id]'); // Target sections within main
+
+        function changeActiveLink() {
+            let index = sections.length;
+            const offset = 100; // Adjust this value based on header height and desired trigger point
+
+            while(--index >= 0 && window.scrollY + offset < sections[index].offsetTop) {}
+
+            navLinks.forEach((link) => link.classList.remove('active'));
+
+            if (index >= 0 && navLinks[index]) {
+                 navLinks[index].classList.add('active');
+            }
+            // Optional: Deactivate all if scrolled way above the first section
+            else if (window.scrollY < (sections[0]?.offsetTop || 0) - offset * 2) {
+                navLinks.forEach((link) => link.classList.remove('active'));
+            }
+        }
+
+        window.addEventListener('scroll', changeActiveLink, { passive: true }); // Use passive listener for better scroll performance
+        window.addEventListener('resize', changeActiveLink); // Recalculate on resize
+        document.addEventListener('DOMContentLoaded', changeActiveLink); // Initial check
+
+
+        // --- Scroll to Top Button ---
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        function toggleScrollToTopButton() {
+             if (window.scrollY > 200) { // Show after scrolling down 200px
+                 scrollToTopBtn.classList.add('show');
+             } else {
+                 scrollToTopBtn.classList.remove('show');
+             }
+        }
+
+        window.addEventListener('scroll', toggleScrollToTopButton, { passive: true });
+        // Initial check in case the page loads already scrolled down
+        document.addEventListener('DOMContentLoaded', toggleScrollToTopButton);
+
+
+        // Scroll to top when button clicked
+        scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+    </script>
+
+</body>
+</html>
